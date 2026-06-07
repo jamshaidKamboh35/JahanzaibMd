@@ -13,9 +13,9 @@ from selenium.common.exceptions import TimeoutException, WebDriverException
 
 # --- কনফিগারেশন ---
 # ⚠️ নিচে আপনার টেলিগ্রাম আইডি নম্বরটি বসিয়ে দিন
-ADMIN_ID = 5165615512 
+ADMIN_ID = 7667102081 
 
-BOT_TOKEN = "8803328478:AAEpVHyLj4svKmfktuewTMZP_1ydvu9zdCQ"
+BOT_TOKEN = "8318313561:AAEAwJ3bVmmtQJjN2_Orxd-6zl1H6sqUaLY"
 bot = telebot.TeleBot(BOT_TOKEN)
 
 driver = None
