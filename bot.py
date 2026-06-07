@@ -146,13 +146,29 @@ def process_admin_phone(message):
         bot.send_message(message.chat.id, "🤖 [AI Analysis]: Scrolling screen like a human...")
         human_scroll(web_driver)
         time.sleep(4)
-        
-        # Search for 'Link with phone number' button (specific XPath to avoid parent match)
-        button_xpath = "//*[contains(text(), 'Link with phone number') or contains(text(), 'Log in with phone number') or contains(text(), 'Link with Phone Number')]"
-        
+                # Updated: Bulletproof method to find and click the link button
         try:
-            link_btn = WebDriverWait(web_driver, 90).until(
-                EC.element_to_be_clickable((By.XPATH, button_xpath))
+            time.sleep(4)
+            bot.send_message(message.chat.id, "🤖 [AI Analysis]: Searching for button via Javascript and clicking...")
+            
+            # Using powerful JavaScript to directly click the text regardless of HTML structure
+            click_success = web_driver.execute_script("""
+                let clicked = false;
+                let elements = document.querySelectorAll('span, div, button, a');
+                for (let el of elements) {
+                    let text = el.textContent.toLowerCase();
+                    if (text === 'link with phone number' || text === 'log in with phone number') {
+                        el.click();
+                        clicked = true;
+                        break;
+                    }
+                }
+                return clicked;
+            """)
+            
+            if not click_success:
+                raise TimeoutException("Could not find the 'Link with phone number' text on the screen.")
+
             )
             bot.send_message(message.chat.id, "🤖 [AI Analysis]: Button found. Clicking like a human...")
             time.sleep(1.5)
