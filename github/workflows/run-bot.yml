@@ -1,0 +1,40 @@
+name: 24/7 Selenium OTP Bot
+
+on:
+  schedule:
+    - cron: '0 */4 * * *' 
+  workflow_dispatch:
+
+# ⚠️ MAGIC FIX FOR ERROR 409: এটি একাধিক বট একসাথে রান হতে দেবে না
+concurrency: 
+  group: otp-bot-runner
+  cancel-in-progress: true
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable xvfb
+
+    - name: Install Requirements
+      run: pip install -r requirements.txt
+
+    - name: Run Selenium Bot
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        EMAIL: ${{ secrets.EMAIL }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+      run: |
+        xvfb-run --auto-servernum timeout 230m python -u bot.py || true
