@@ -17,12 +17,12 @@ telebot.logger.setLevel(logging.ERROR)
 # ==========================================
 # CONFIGURATION
 # ==========================================
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-EMAIL     = os.getenv("EMAIL")
-PASSWORD  = os.getenv("PASSWORD")
+BOT_TOKEN = os.getenv("8934142648:AAGySbUvTqQEOMxeT-2znaNEG47sm1J1z2E")
+EMAIL     = os.getenv("jamshaidaliamjad4@gmail.com")
+PASSWORD  = os.getenv("jamsheedali")
 
-GROUP_ID          = "-1003871481057"
-USER_BOT_USERNAME = "YourOTPBot"
+GROUP_ID          = "-1003370106221"
+USER_BOT_USERNAME = "HadiPenal_Bot"
 
 # ==========================================
 # SERVICE FILTERS & LOGOS
